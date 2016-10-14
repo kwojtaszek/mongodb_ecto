@@ -229,11 +229,11 @@ defmodule Mongo.Ecto.Connection do
   # defp format_query(_entry, :kill_cursors, [cursors, _opts]) do
   #   ["KILL_CURSORS", format_part("cursor_ids", cursors)]
   # end
-
+  require IEx
   defp prepare_format(log) do
-    log
-    |> List.flatten
-    |> Enum.join(" ")
+    [command | params] = log
+
+    "#{command}: #{inspect(params)}"
   end
 
   defp format_part(name, value) do
